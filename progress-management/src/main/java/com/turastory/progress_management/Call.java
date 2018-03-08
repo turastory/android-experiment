@@ -12,12 +12,14 @@ public class Call extends Thread implements Cancellable {
 
     private boolean flag = false;
 
+    private MainActivity mainActivity;
     private int time;
-    private Runnable runnable;
+    private boolean success;
 
-    public Call(int time, Runnable runnable) {
+    public Call(MainActivity mainActivity, int time, boolean success) {
+        this.mainActivity = mainActivity;
         this.time = time;
-        this.runnable = runnable;
+        this.success = success;
     }
 
     @Override
@@ -35,12 +37,20 @@ public class Call extends Thread implements Cancellable {
         }
 
         Log.e("asdf", "Thread stop");
-        runnable.run();
+        mainActivity.removeCall(this);
+
+        if (flag) {
+            Log.e("asdf", "Cancel");
+        } else if (success) {
+            Log.e("asdf", "Success");
+        } else {
+            Log.e("asdf", "Failure");
+        }
     }
 
     @Override
     public void cancel() {
-        Log.e("asdf", "Cancel a call.");
+        Log.e("asdf", "Request cancel a call.");
         flag = true;
     }
 

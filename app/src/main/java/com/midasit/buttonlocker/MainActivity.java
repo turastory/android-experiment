@@ -3,18 +3,12 @@ package com.midasit.buttonlocker;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
     
     private static final int MSG_CALLBACK = 1;
     
@@ -24,47 +18,28 @@ public class MainActivity extends AppCompatActivity {
     Button callbackButton;
     
     private Handler handler;
-    private Map<View, Long> timelyLock = new HashMap<>();
-    private Map<View, AtomicBoolean> manualLock = new HashMap<>();
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.test);
+        ButterKnife.bind(this);
         
         handler = new MyHandler();
         
-        registerTimelyButton(timelyButton);
-        
-        timelyButton.setOnClickListener(v -> {
-        });
-        
-        timelyButton.setOnClickListener(new OnClickListenerProxy() {
-            @Override
-            public void onClick(View v) {
-            
-            }
-        });
-        
-        callbackButton.setOnClickListener(v -> {
-            handler.sendEmptyMessageDelayed(MSG_CALLBACK, 1000);
-        });
-    }
-    
-    protected void registerTimelyButton(View view) {
-        if (!view.isClickable()) return;
-    
-        Log.e("asdf", "Register " + view.getTag());
-        
-        view.setOnClickListener(v -> {});
-    }
-    
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        
-        timelyLock.clear();
-        manualLock.clear();
+//        timelyButton.setOnClickListener(new OnClickListenerProxy() {
+//            @Override
+//            public void onClick(View v) {
+//                if (isLock(v))
+//                    return;
+//
+//                lock(v);
+//
+//                Log.e("asdf", "Run!!");
+//
+//                handler.postDelayed(() -> release(v), 1000);
+//            }
+//        });
     }
     
     static class MyHandler extends Handler {

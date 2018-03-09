@@ -2,6 +2,8 @@ package com.turastory.progress_management;
 
 import android.util.Log;
 
+import java.lang.ref.WeakReference;
+
 /**
  * Created by soldi on 2018-03-08.
  * <p>
@@ -12,12 +14,12 @@ public class Call extends Thread implements Cancellable {
 
     private boolean flag = false;
 
-    private MainActivity mainActivity;
+    private WeakReference<MainActivity> mainActivityWeak;
     private int time;
     private boolean success;
 
     public Call(MainActivity mainActivity, int time, boolean success) {
-        this.mainActivity = mainActivity;
+        this.mainActivityWeak = new WeakReference<>(mainActivity);
         this.time = time;
         this.success = success;
     }
@@ -37,7 +39,8 @@ public class Call extends Thread implements Cancellable {
         }
 
         Log.e("asdf", "Thread stop");
-        mainActivity.removeCall(this);
+        if (mainActivityWeak.get() != null)
+            mainActivityWeak.get().removeCall(this);
 
         if (flag) {
             Log.e("asdf", "Cancel");

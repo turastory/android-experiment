@@ -6,8 +6,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.widget.Button;
 
+import java.util.HashSet;
 import java.util.Random;
+import java.util.Set;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 
 import butterknife.BindView;
@@ -22,7 +25,8 @@ public class MainActivity extends AppCompatActivity {
     Button cancelButton;
     @BindView(R.id.sequential_button)
     Button sequentialButton;
-    private BlockingQueue<Call> blockingQueue = new LinkedBlockingQueue<>(10);
+    
+    private Set<Call> calls = new HashSet<>();
     private Call call;
     private NetworkProgress progress;
 
@@ -33,12 +37,6 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         requestButton.setOnClickListener(v -> {
-            // 큐에 빈자리가 있는지 확인
-            if (!isQueueAvailable()) {
-                Log.e("asdf", "Queue is not available now.");
-                return;
-            }
-
             call = createRandomCall();
             addCall(call);
         });
@@ -69,14 +67,8 @@ public class MainActivity extends AppCompatActivity {
         }).start();
     }
 
-    private boolean isQueueAvailable() {
-        synchronized (lock) {
-            return blockingQueue.remainingCapacity() > 0;
-        }
-    }
-
     private void printQueueSize() {
-        Log.e("asdf", String.valueOf(blockingQueue.size()));
+        Log.e("asdf", String.valueOf(calls.size()));
     }
 
     private Call createRandomCall() {
@@ -88,19 +80,23 @@ public class MainActivity extends AppCompatActivity {
 
     private void addCall(Call call) {
         call.start();
-
-        if (blockingQueue.size() == 0) {
-            progress = new NetworkProgress(this);
-            progress.show();
+        
+        synchronized (lock) {
+            calls.add(call);
+            
+            if (calls.size() == 1) {
+                progress = new NetworkProgress(this);
+                progress.show();
+            }
         }
-
-        blockingQueue.add(call);
     }
 
     public void removeCall(Call call) {
-        blockingQueue.remove(call);
-
-        if (blockingQueue.size() == 0)
-            progress.dismiss();
+        synchronized (lock) {
+            calls.remove(call);
+            
+            if (calls.size() == 0 && progress != null)
+                progress.dismiss();
+        }
     }
 }

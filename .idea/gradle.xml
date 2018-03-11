@@ -10,6 +10,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/lock" />
             <option value="$PROJECT_DIR$/progress-management" />
+            <option value="$PROJECT_DIR$/spannable" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

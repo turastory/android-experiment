@@ -1,5 +1,6 @@
 package com.turastory.progress_management;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
@@ -9,9 +10,6 @@ import android.widget.Button;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
-import java.util.concurrent.BlockingQueue;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.LinkedBlockingQueue;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,6 +23,8 @@ public class MainActivity extends AppCompatActivity {
     Button cancelButton;
     @BindView(R.id.sequential_button)
     Button sequentialButton;
+    @BindView(R.id.pending_request_button)
+    Button pendingRequestButton;
     
     private Set<Call> calls = new HashSet<>();
     private Call call;
@@ -55,6 +55,12 @@ public class MainActivity extends AppCompatActivity {
             new Handler().postDelayed(() -> addCall(createRandomCall()), 1500);
         });
 
+        pendingRequestButton.setOnClickListener(v -> {
+            new Handler().postDelayed(() -> addCall(createRandomCall()), 1500);
+            startActivity(new Intent(this, NewActivity.class));
+            finish();
+        });
+        
         new Thread(() -> {
             try {
                 while (true) {
@@ -66,7 +72,13 @@ public class MainActivity extends AppCompatActivity {
             }
         }).start();
     }
-
+    
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Log.e("asdf", "MainActivity is Stopped.");
+    }
+    
     private void printQueueSize() {
         Log.e("asdf", String.valueOf(calls.size()));
     }
@@ -84,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
         synchronized (lock) {
             calls.add(call);
             
-            if (calls.size() == 1) {
+            if (calls.size() == 1 && !isFinishing()) {
                 progress = new NetworkProgress(this);
                 progress.show();
             }

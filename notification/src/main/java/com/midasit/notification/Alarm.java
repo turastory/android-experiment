@@ -13,9 +13,9 @@ import java.util.Calendar;
  */
 public class Alarm {
     
-    public static final int DEFAULT_INTERVAL = 1000 * 60;
+    public static final long DEFAULT_INTERVAL = 1000 * 60;
     
-    public static void set(Context context, int hour, int minute, int second, int interval) {
+    public static void set(Context context, int hour, int minute, int second, long interval) {
         Log.e("asdf", "Register alarm at " + String.format("%02d:%02d:%02d", hour, minute, second));
         
         Calendar calendar = Calendar.getInstance();

@@ -6,6 +6,7 @@
   android:layout_height="match_parent">
 
   <TextView
+    android:id="@+id/text"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:text="Hello World!"
@@ -16,11 +17,48 @@
 
   <Button
     android:id="@+id/button"
-    android:text="Hello"
+    android:text="set alarm"
     android:background="#63d290"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginBottom="24dp"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"/>
+
+  <Button
+    android:id="@+id/button2"
+    android:text="set alarm"
+    android:background="#63d290"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="84dp"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"/>
+
+  <Button
+    android:id="@+id/cancel_button"
+    android:text="cancel"
+    android:background="#63d290"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="24dp"
+    app:layout_constraintHorizontal_bias="0.15"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"/>
+
+  <Button
+    android:id="@+id/increment_button"
+    android:text="increment"
+    android:background="#63d290"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="24dp"
+    app:layout_constraintHorizontal_bias="0.85"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"/>

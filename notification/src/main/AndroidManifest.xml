@@ -3,6 +3,7 @@
           package="com.midasit.notification">
 
   <uses-permission android:name="android.permission.SET_ALARM"/>
+  <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
   <application
     android:allowBackup="true"
@@ -20,6 +21,11 @@
     </activity>
     <activity android:name=".OnWakeActivity"/>
     <receiver android:name=".AlarmReceiver"/>
+    <receiver android:name=".BootReceiver">
+      <intent-filter>
+        <action android:name="android.intent.action.BOOT_COMPLETED"/>
+      </intent-filter>
+    </receiver>
   </application>
 
 </manifest>

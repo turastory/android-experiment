@@ -1,1 +1,1 @@
-include ':lock', ':progress-management', ':spannable'
+include ':lock', ':progress-management', ':spannable', ':notification'

@@ -11,19 +11,29 @@ import java.lang.ref.WeakReference;
  */
 
 public class Call extends Thread implements Cancellable {
-
+    
+    public interface OnFinishListener {
+        void onFinish();
+    }
+    
     private boolean flag = false;
 
     private WeakReference<MainActivity> mainActivityWeak;
     private int time;
     private boolean success;
+    
+    private OnFinishListener onFinishListener;
 
     public Call(MainActivity mainActivity, int time, boolean success) {
         this.mainActivityWeak = new WeakReference<>(mainActivity);
         this.time = time;
         this.success = success;
     }
-
+    
+    public void setOnFinishListener(OnFinishListener onFinishListener) {
+        this.onFinishListener = onFinishListener;
+    }
+    
     @Override
     public void run() {
         int count = 0;
@@ -48,6 +58,10 @@ public class Call extends Thread implements Cancellable {
             Log.e("asdf", "Success");
         } else {
             Log.e("asdf", "Failure");
+        }
+        
+        if (onFinishListener != null) {
+            onFinishListener.onFinish();
         }
     }
 

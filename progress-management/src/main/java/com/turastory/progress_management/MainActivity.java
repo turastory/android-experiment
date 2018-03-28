@@ -21,21 +21,28 @@ public class MainActivity extends AppCompatActivity {
     Button requestButton;
     @BindView(R.id.cancel_button)
     Button cancelButton;
-    @BindView(R.id.sequential_button)
-    Button sequentialButton;
+    @BindView(R.id.sparse_button)
+    Button sparseButton;
     @BindView(R.id.pending_request_button)
     Button pendingRequestButton;
+    @BindView(R.id.sequential_call_button)
+    Button sequentialCallButton;
+    @BindView(R.id.parallel_call_button)
+    Button parallelCallButton;
     
     private Set<Call> calls = new HashSet<>();
     private Call call;
     private NetworkProgress progress;
-
+    private CallHandler callHandler;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+        callHandler = new CallHandler(this);
+        
         requestButton.setOnClickListener(v -> {
             call = createRandomCall();
             addCall(call);
@@ -47,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        sequentialButton.setOnClickListener(v -> {
+        sparseButton.setOnClickListener(v -> {
             new Handler().postDelayed(() -> addCall(createRandomCall()), 300);
             new Handler().postDelayed(() -> addCall(createRandomCall()), 600);
             new Handler().postDelayed(() -> addCall(createRandomCall()), 900);
@@ -59,6 +66,17 @@ public class MainActivity extends AppCompatActivity {
             new Handler().postDelayed(() -> addCall(createRandomCall()), 1500);
             startActivity(new Intent(this, NewActivity.class));
             finish();
+        });
+        
+        sequentialCallButton.setOnClickListener(v -> {
+            for (int i = 0; i < 5; i++) {
+                runSequential(createRandomCall());
+            }
+        });
+        parallelCallButton.setOnClickListener(v -> {
+            for (int i = 0; i < 5; i++) {
+                runParallel(createRandomCall());
+            }
         });
         
         new Thread(() -> {
@@ -89,8 +107,17 @@ public class MainActivity extends AppCompatActivity {
 
         return new Call(this, 1000, n == 0);
     }
+    
+    private void runSequential(Call call) {
+        callHandler.enqueue(call);
+    }
+    
+    private void runParallel(Call call) {
+        addCall(call);
+    }
 
-    private void addCall(Call call) {
+    public void addCall(Call call) {
+        Log.e("asdf", "execute " + call.getName());
         call.start();
         
         synchronized (lock) {

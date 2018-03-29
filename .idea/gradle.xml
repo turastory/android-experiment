@@ -9,10 +9,10 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/lock" />
-            <option value="$PROJECT_DIR$/mvp" />
             <option value="$PROJECT_DIR$/notification" />
             <option value="$PROJECT_DIR$/progress-management" />
             <option value="$PROJECT_DIR$/spannable" />
+            <option value="$PROJECT_DIR$/testing" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

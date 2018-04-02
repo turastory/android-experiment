@@ -21,3 +21,11 @@ Register an alarm at specific time, and repeat regularly and send a push notific
 ### spannable
 
 Spannable string that changes the color or state of itself when user clicks it.
+
+### testing
+
+Android testing exercises
+
+### component
+
+Let's make a component-based MVP architecture.

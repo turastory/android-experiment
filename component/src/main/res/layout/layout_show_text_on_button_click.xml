@@ -2,15 +2,22 @@
 <android.support.constraint.ConstraintLayout
   xmlns:android="http://schemas.android.com/apk/res/android"
   xmlns:app="http://schemas.android.com/apk/res-auto"
-  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="com.midasit.component.MainActivity">
+  android:background="#eee">
 
   <TextView
+    android:id="@+id/hello_text_view"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="Hello World!"
+    android:text="Hello There!"
+    android:visibility="invisible"/>
+
+  <Button
+    android:id="@+id/click_me_button"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="click me!"
     app:layout_constraintBottom_toBottomOf="parent"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"

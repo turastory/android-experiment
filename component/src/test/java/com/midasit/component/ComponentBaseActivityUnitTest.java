@@ -3,6 +3,7 @@ package com.midasit.component;
 import com.midasit.component.component.EmptyComponent;
 import com.midasit.component.component.TextComponent;
 import com.midasit.component.core.Component;
+import com.midasit.component.ui.ComponentTestActivity;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -22,11 +23,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 @RunWith(RobolectricTestRunner.class)
 public class ComponentBaseActivityUnitTest {
     
-    MainActivity activity;
+    ComponentTestActivity activity;
     
     @Before
     public void readyMainActivity() {
-        activity = Robolectric.setupActivity(MainActivity.class);
+        activity = Robolectric.setupActivity(ComponentTestActivity.class);
     }
     
     @Test

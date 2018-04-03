@@ -15,8 +15,9 @@ import java.util.List;
 public abstract class ComponentBaseActivity extends AppCompatActivity {
     List<Component> components = new ArrayList<>();
     
-    public void addComponent(Component component) {
+    public ComponentBaseActivity addComponent(Component component) {
         components.add(component);
+        return this;
     }
     
     public Optional<Component> getComponent(final String componentName) {

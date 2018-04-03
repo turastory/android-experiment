@@ -22,8 +22,20 @@ public abstract class ComponentBaseFragment extends Fragment {
     // Component Handling
     protected List<Component> components = new ArrayList<>();
     
+    private boolean viewCreated;
+    
     public ComponentBaseFragment addComponent(Component component) {
         components.add(component);
+     
+        if (component instanceof UIComponent) {
+            if (viewCreated) {
+                renderUiComponent(
+                    LayoutInflater.from(getView().getContext()),
+                    getView(),
+                    (UIComponent) component);
+            }
+        }
+        
         return this;
     }
     
@@ -55,6 +67,11 @@ public abstract class ComponentBaseFragment extends Fragment {
         return components.size();
     }
     
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        viewCreated = false;
+    }
     
     @Nullable
     @Override
@@ -64,15 +81,23 @@ public abstract class ComponentBaseFragment extends Fragment {
         Stream.of(components)
             .filter(component -> component instanceof UIComponent)
             .map(component -> (UIComponent) component)
-            .forEach(uiComponent -> {
-                View parent = view.findViewById(uiComponent.bindingViewGroupId());
-                inflater.inflate(uiComponent.resourceId(), (ViewGroup) parent, uiComponent.attachToRoot());
-                
-                if (uiComponent.attachToRoot())
-                    uiComponent.bindView(parent);
-            });
+            .forEach(uiComponent -> renderUiComponent(inflater, view, uiComponent));
+        
+        viewCreated = true;
         
         return view;
+    }
+    
+    private void renderUiComponent(LayoutInflater inflater, View view, UIComponent uiComponent) {
+        ViewGroup parent = view.findViewById(uiComponent.bindingViewGroupId());
+        
+        if (parent.getChildCount() > 0)
+            parent.removeAllViews();
+        
+        inflater.inflate(uiComponent.resourceId(), parent, uiComponent.attachToRoot());
+        
+        if (uiComponent.attachToRoot())
+            uiComponent.bindView(parent);
     }
     
     public abstract View createView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState);

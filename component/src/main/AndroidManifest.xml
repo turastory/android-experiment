@@ -10,13 +10,15 @@
     android:supportsRtl="true"
     android:theme="@style/AppTheme">
     <activity android:name=".ui.ComponentTestActivity">
+    </activity>
+    <activity android:name=".ui.TestActivity">
+    </activity>
+    <activity android:name=".ui.OnDemandTestActivity">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
 
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
-    </activity>
-    <activity android:name=".ui.TestActivity">
     </activity>
   </application>
 

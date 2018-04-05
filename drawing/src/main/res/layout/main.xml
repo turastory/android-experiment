@@ -51,7 +51,7 @@
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
     android:padding="4dp"
-    app:backgroundColor="#332874ff"
+    app:progressBackgroundColor="#332874ff"
     app:progressForegroundColor="#cc2874ff"
     app:indicatorHeight="4dp"
     app:indicatorColor="#333333"

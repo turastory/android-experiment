@@ -22,10 +22,15 @@ Register an alarm at specific time, and repeat regularly and send a push notific
 
 Spannable string that changes the color or state of itself when user clicks it.
 
-### testing
+### testing - inactive
 
 Android testing exercises
 
-### component
+### component - inactive
 
 Let's make a component-based MVP architecture.
+
+## drawing
+
+ProgressBar with round corners + indicator for progress + multiple sections.
+Hence, RoundPeakSectionedProgressBar

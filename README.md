@@ -30,7 +30,12 @@ Android testing exercises
 
 Let's make a component-based MVP architecture.
 
-## drawing
+### drawing
 
-ProgressBar with round corners + indicator for progress + multiple sections.
-Hence, RoundPeakSectionedProgressBar
+All about drawing something. (Canvas, ...)
+ProgressBar + RoundCorner + Progress Indicator + Section..?
+
+### animation
+
+All about animations! View/Property, ViewProperty, Transitions, ...
++ Adobe Effects animation with Lottie Android

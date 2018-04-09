@@ -282,7 +282,7 @@ public class RoundPeakProgressBar extends View {
     }
     
     private float ratio() {
-        return progress / max;
+        return MathUtil.clamp(progress / max, 0, 1);
     }
     
     private void drawProgressBackground(Canvas canvas) {

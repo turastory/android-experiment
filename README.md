@@ -29,3 +29,13 @@ Android testing exercises
 ### component
 
 Let's make a component-based MVP architecture.
+
+### drawing
+
+All about drawing something. (Canvas, ...)
+ProgressBar + RoundCorner + Progress Indicator + Section..?
+
+### animation
+
+All about animations! View/Property, ViewProperty, Transitions, ...
++ Adobe Effects animation with Lottie Android

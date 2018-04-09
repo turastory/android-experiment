@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="teamidus.com.drawing">
+          package="com.turastory.drawing">
 
   <application
     android:allowBackup="true"

@@ -23,7 +23,7 @@
   android:orientation="vertical"
   >
 
-  <teamidus.com.drawing.external.google.PieChart
+  <com.turastory.drawing.external.google.PieChart
     android:id="@+id/Pie"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -42,7 +42,7 @@
     custom:showText="true"
     />
 
-  <teamidus.com.drawing.RoundPeakProgressBar
+  <com.turastory.drawing.RoundPeakProgressBar
     android:id="@+id/progress_bar"
     android:layout_width="match_parent"
     android:layout_height="16dp"

@@ -12,6 +12,10 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import teamidus.com.drawing.util.MathUtil;
 
 /**
@@ -39,6 +43,8 @@ public class RoundPeakProgressBar extends View {
     
     private Paint sectionDividerPaint;
     private Path sectionDividerPath;
+    
+    private List<Section> sections = new ArrayList<>();
     
     // set from users
     
@@ -96,6 +102,18 @@ public class RoundPeakProgressBar extends View {
         sectionDividerPath = new Path();
     }
     
+    
+    // getters
+    
+    public float getProgress() {
+        return progress;
+    }
+    
+    public float getMax() {
+        return max;
+    }
+    
+    
     // setters
     
     public void setProgress(float progress) {
@@ -138,6 +156,25 @@ public class RoundPeakProgressBar extends View {
     
     public void setProgressBackgroundColor(int progressBackgroundColor) {
         this.progressBackgroundColor = progressBackgroundColor;
+        invalidate();
+        requestLayout();
+    }
+    
+    public void addSection(float... ratio) {
+        Section[] sections = new Section[ratio.length];
+        for (int i = 0; i < sections.length; i++)
+            sections[i] = new Section(ratio[i]);
+        addSection(sections);
+    }
+    
+    public void addSection(Section... section) {
+        sections.addAll(Arrays.asList(section));
+        invalidate();
+        requestLayout();
+    }
+    
+    public void clearSection() {
+        sections.clear();
         invalidate();
         requestLayout();
     }
@@ -185,15 +222,43 @@ public class RoundPeakProgressBar extends View {
         
         drawProgressBackground(canvas);
         drawProgressForeground(canvas);
+        drawSections(canvas);
         drawIndicator(canvas);
         
         canvas.restore();
     }
     
+    protected void drawSections(Canvas canvas) {
+        for (Section section: sections)
+            drawSection(canvas, section);
+    }
+    
+    private void drawSection(Canvas canvas, Section section) {
+        float baseX = getWidth() * section.ratio;
+        float sectionDividerHeight = progressBackgroundRect.height() * 0.2f;
+        float dx = halfWidth(sectionDividerHeight);
+   
+        // top side
+        sectionDividerPath.reset();
+        sectionDividerPath.moveTo(baseX, indicatorHeight + sectionDividerHeight);
+        sectionDividerPath.lineTo(baseX - dx, indicatorHeight);
+        sectionDividerPath.lineTo(baseX + dx, indicatorHeight);
+        sectionDividerPath.close();
+        canvas.drawPath(sectionDividerPath, sectionDividerPaint);
+        
+        // bottom side
+        sectionDividerPath.reset();
+        sectionDividerPath.moveTo(baseX, progressBackgroundRect.bottom - sectionDividerHeight);
+        sectionDividerPath.lineTo(baseX - dx, progressBackgroundRect.bottom);
+        sectionDividerPath.lineTo(baseX + dx, progressBackgroundRect.bottom);
+        sectionDividerPath.close();
+        canvas.drawPath(sectionDividerPath, sectionDividerPaint);
+    }
+    
     // draw a indicator - right triangle on progress.
     private void drawIndicator(Canvas canvas) {
         float x = getWidth() * ratio();
-        float dx = (float) (indicatorHeight / Math.tan(Math.toRadians(60)));
+        float dx = halfWidth(indicatorHeight);
         
         indicatorPath.reset();
         indicatorPath.moveTo(x, indicatorHeight);
@@ -201,6 +266,10 @@ public class RoundPeakProgressBar extends View {
         indicatorPath.lineTo(x + dx, 0);
         indicatorPath.close();
         canvas.drawPath(indicatorPath, indicatorPaint);
+    }
+    
+    private float halfWidth(float height) {
+        return (float) (height / Math.tan(Math.toRadians(60)));
     }
     
     private void readyIndicatorRect(Rect rect) {

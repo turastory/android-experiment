@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
+import java.util.Random;
+
 import teamidus.com.drawing.external.google.PieChart;
 
 /**
@@ -25,17 +27,11 @@ public class MainActivity extends AppCompatActivity {
         setupPieChart(getResources());
     
         final RoundPeakProgressBar progressBar = findViewById(R.id.progress_bar);
-        
-        ValueAnimator animator = readyProgressBarAnimation();
-        
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                progressBar.setProgress((Float) animation.getAnimatedValue());
-            }
-        });
-        
-        animator.start();
+        progressBar.addSection(0.2f, 0.7f);
+    
+        findViewById(R.id.Reset).setOnClickListener(v -> randomize(progressBar));
+
+        randomize(progressBar);
     }
     
     private void setupPieChart(Resources res) {
@@ -54,12 +50,17 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     
-    private ValueAnimator readyProgressBarAnimation() {
-        ValueAnimator anim = ValueAnimator.ofFloat(0f, 100f);
-        anim.setDuration(1000);
+    private void randomize(final RoundPeakProgressBar progressBar) {
+        ValueAnimator animator = readyProgressBarAnimation(progressBar.getProgress(), new Random().nextFloat() * progressBar.getMax());
+        animator.addUpdateListener(animation ->
+            progressBar.setProgress((Float) animation.getAnimatedValue()));
+        animator.start();
+    }
+    
+    private ValueAnimator readyProgressBarAnimation(float start, float end) {
+        ValueAnimator anim = ValueAnimator.ofFloat(start, end);
+        anim.setDuration(300);
         anim.setInterpolator(new AccelerateDecelerateInterpolator());
-        anim.setRepeatCount(ValueAnimator.INFINITE);
-        anim.setRepeatMode(ValueAnimator.RESTART);
         return anim;
     }
 }

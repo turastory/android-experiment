@@ -10,6 +10,7 @@ import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.ColorInt;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -26,10 +27,10 @@ import java.util.Random;
 
 /**
  * Created by nyh0111 on 2018-04-10.
- *
+ * <p>
  * RadarChart with points and labels..
  * Not that general purpose.
- *
+ * <p>
  * Recommended ratio - 9:7 (w:h)
  */
 public class Radar6Chart extends View {
@@ -38,7 +39,7 @@ public class Radar6Chart extends View {
     public static final float CHART_HEIGHT_RATIO = 0.565f;
     public static final float DELTA_Y_RATIO = 0.24f;
     
-    public static final List<String> defaultLabels = new ArrayList<String>(){{
+    public static final List<String> defaultLabels = new ArrayList<String>() {{
         add("Label1");
         add("Label2");
         add("Label3");
@@ -47,7 +48,7 @@ public class Radar6Chart extends View {
         add("Label6");
     }};
     
-    public static final List<Float> defaultRatios = new ArrayList<Float>(){{
+    public static final List<Float> defaultRatios = new ArrayList<Float>() {{
         Random random = new Random();
         add(MathUtil.clamp(random.nextFloat(), 0.25f, 0.75f));
         add(MathUtil.clamp(random.nextFloat(), 0.25f, 0.75f));
@@ -107,6 +108,65 @@ public class Radar6Chart extends View {
         init();
     }
     
+    // Setters are coming..
+    
+    public void setRatios(List<Float> ratios) {
+        if (ratios.size() != 6)
+            throw new IllegalArgumentException("list size must be 6.");
+        
+        this.ratios = ratios;
+    }
+    
+    public void setLabels(List<String> labels) {
+        if (labels.size() != 6)
+            throw new IllegalArgumentException("list size must be 6.");
+        
+        this.labels = labels;
+    }
+    
+    public void setPolygonForegroundDrawable(Drawable polygonForegroundDrawable) {
+        needInvalidate(() -> this.polygonForegroundDrawable = polygonForegroundDrawable);
+    }
+    
+    public void setPolygonBackgroundColor(@ColorInt int polygonBackgroundColor) {
+        needInvalidate(() -> this.polygonBackgroundColor = polygonBackgroundColor);
+    }
+    
+    public void setPolygonForegroundColor(@ColorInt int polygonForegroundColor) {
+        needInvalidate(() -> this.polygonForegroundColor = polygonForegroundColor);
+    }
+    
+    public void setDotColor(@ColorInt int dotColor) {
+        needInvalidate(() -> this.dotColor = dotColor);
+    }
+    
+    public void setDotStrokeColor(@ColorInt int dotStrokeColor) {
+        needInvalidate(() -> this.dotStrokeColor = dotStrokeColor);
+    }
+    
+    public void setDotRadius(float dotRadius) {
+        needInvalidate(() -> this.dotRadius = dotRadius);
+    }
+    
+    public void setDotWidth(float dotWidth) {
+        needInvalidate(() -> this.dotWidth = dotWidth);
+    }
+    
+    public void setTextColor(@ColorInt int textColor) {
+        needInvalidate(() -> this.textColor = textColor);
+    }
+    
+    public void setTextSize(float textSizeInPixel) {
+        needInvalidate(() -> this.textSize = textSizeInPixel);
+    }
+    
+    private void needInvalidate(Runnable runnable) {
+        runnable.run();
+        invalidate();
+        requestLayout();
+    }
+    
+    
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
@@ -132,7 +192,7 @@ public class Radar6Chart extends View {
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
         setPathBuilder();
-
+        
         drawBackground(canvas, pathBuilder.makePath());
         drawForeground(canvas, pathBuilder.makePath(ratios));
         drawDots(canvas, pathBuilder.makePoints());
@@ -176,17 +236,17 @@ public class Radar6Chart extends View {
             // fill
             paint.setStyle(Paint.Style.FILL);
             paint.setColor(dotColor);
-    
+            
             for (PointF point : points) {
                 canvas.drawCircle(point.x, point.y, dotRadius, paint);
             }
-    
+            
             // stroke
             paint.setStyle(Paint.Style.STROKE);
             paint.setColor(dotStrokeColor);
             paint.setStrokeWidth(dotWidth);
             paint.setStrokeCap(Paint.Cap.ROUND);
-    
+            
             for (PointF point : points) {
                 canvas.drawCircle(point.x, point.y, dotRadius, paint);
             }
@@ -197,28 +257,29 @@ public class Radar6Chart extends View {
         usePaint(paint -> {
             paint.setColor(textColor);
             paint.setTextSize(textSize);
-    
+            
             paint.setTextAlign(Paint.Align.CENTER);
             canvas.drawText(labels.get(0), points[0].x, points[0].y, paint);
             canvas.drawText(labels.get(3), points[3].x, points[3].y, paint);
-    
+            
             paint.setTextAlign(Paint.Align.LEFT);
             canvas.drawText(labels.get(1), points[1].x, points[1].y, paint);
             canvas.drawText(labels.get(2), points[2].x, points[2].y, paint);
-    
+            
             paint.setTextAlign(Paint.Align.RIGHT);
             canvas.drawText(labels.get(4), points[4].x, points[4].y, paint);
             canvas.drawText(labels.get(5), points[5].x, points[5].y, paint);
         });
     }
     
+    // Ensure that the paint would not be dirty by others..?
     private void usePaint(Consumer<Paint> paintConsumer) {
         // save
         Paint.Style previous = paint.getStyle();
         int previousColor = paint.getColor();
         
         paintConsumer.accept(paint);
-    
+        
         // restore
         paint.setColor(previousColor);
         paint.setStyle(previous);

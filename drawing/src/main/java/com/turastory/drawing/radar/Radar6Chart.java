@@ -233,19 +233,19 @@ public class Radar6Chart extends View {
     
     private void drawDots(Canvas canvas, PointF[] points) {
         usePaint(paint -> {
-            // fill
-            paint.setStyle(Paint.Style.FILL);
-            paint.setColor(dotColor);
-            
-            for (PointF point : points) {
-                canvas.drawCircle(point.x, point.y, dotRadius, paint);
-            }
-            
             // stroke
             paint.setStyle(Paint.Style.STROKE);
             paint.setColor(dotStrokeColor);
             paint.setStrokeWidth(dotWidth);
             paint.setStrokeCap(Paint.Cap.ROUND);
+    
+            for (PointF point : points) {
+                canvas.drawCircle(point.x, point.y, dotRadius, paint);
+            }
+            
+            // fill
+            paint.setStyle(Paint.Style.FILL);
+            paint.setColor(dotColor);
             
             for (PointF point : points) {
                 canvas.drawCircle(point.x, point.y, dotRadius, paint);

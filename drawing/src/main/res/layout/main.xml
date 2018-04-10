@@ -22,7 +22,7 @@
   android:orientation="vertical"
   >
 
-  <com.turastory.drawing.RoundPeakProgressBar
+  <com.turastory.drawing.progress.RoundPeakProgressBar
     android:id="@+id/progress_bar"
     android:layout_width="match_parent"
     android:layout_height="16dp"

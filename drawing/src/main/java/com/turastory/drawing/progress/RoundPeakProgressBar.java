@@ -1,4 +1,4 @@
-package com.turastory.drawing;
+package com.turastory.drawing.progress;
 
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -12,6 +12,8 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
 
+import com.turastory.drawing.R;
+import com.turastory.drawing.Section;
 import com.turastory.drawing.util.MathUtil;
 
 import java.util.ArrayList;

@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.animation.AccelerateDecelerateInterpolator;
 
+import com.turastory.drawing.progress.RoundPeakProgressBar;
+
 import java.util.Random;
 
 /**

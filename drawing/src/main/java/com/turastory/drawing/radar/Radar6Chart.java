@@ -114,14 +114,14 @@ public class Radar6Chart extends View {
         if (ratios.size() != 6)
             throw new IllegalArgumentException("list size must be 6.");
         
-        this.ratios = ratios;
+        needInvalidate(() -> this.ratios = ratios);
     }
     
     public void setLabels(List<String> labels) {
         if (labels.size() != 6)
             throw new IllegalArgumentException("list size must be 6.");
         
-        this.labels = labels;
+        needInvalidate(() -> this.labels = labels);
     }
     
     public void setPolygonForegroundDrawable(Drawable polygonForegroundDrawable) {

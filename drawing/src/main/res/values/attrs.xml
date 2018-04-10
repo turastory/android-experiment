@@ -40,4 +40,16 @@
         <attr name="progressForegroundColor" format="color"/>
         <attr name="progressBackgroundColor" format="color"/>
     </declare-styleable>
+    
+    <declare-styleable name="Radar6Chart">
+        <attr name="polygonBackgroundColor" format="color"/>
+        <attr name="polygonForegroundDrawable" format="reference"/>
+        <attr name="polygonForegroundColor" format="color"/>
+        <attr name="dotRadius" format="dimension"/>
+        <attr name="dotWidth" format="dimension"/>
+        <attr name="dotColor" format="color"/>
+        <attr name="dotStrokeColor" format="color"/>
+        <attr name="textSize" format="dimension"/>
+        <attr name="textColor" format="color"/>
+    </declare-styleable>
 </resources>

@@ -33,7 +33,8 @@ Let's make a component-based MVP architecture.
 ### drawing
 
 All about drawing something. (Canvas, ...)
-ProgressBar + RoundCorner + Progress Indicator + Section..?
+1. ProgressBar + RoundCorner + Progress Indicator + Section..?
+2. RadarChart with points and labels, but only 6 vertices!
 
 ### animation
 

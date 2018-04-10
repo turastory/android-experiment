@@ -117,47 +117,37 @@ public class RoundPeakProgressBar extends View {
     // setters
     
     public void setProgress(float progress) {
-        this.progress = progress;
-        invalidate();
-        requestLayout();
+        needInvalidate(() -> this.progress = progress);
     }
     
     public void setMax(float max) {
-        this.max = max;
-        invalidate();
-        requestLayout();
+        needInvalidate(() -> this.max = max);
     }
     
     public void setRadius(float radius) {
-        this.radius = radius;
-        invalidate();
-        requestLayout();
+        needInvalidate(() -> this.radius = radius);
     }
     
     public void setSectionDividerColor(int sectionDividerColor) {
-        this.sectionDividerColor = sectionDividerColor;
-        sectionDividerPaint.setColor(sectionDividerColor);
-        invalidate();
-        requestLayout();
+        needInvalidate(() -> {
+            this.sectionDividerColor = sectionDividerColor;
+            sectionDividerPaint.setColor(sectionDividerColor);
+        });
     }
     
     public void setIndicatorColor(int indicatorColor) {
-        this.indicatorColor = indicatorColor;
-        indicatorPaint.setColor(indicatorColor);
-        invalidate();
-        requestLayout();
+        needInvalidate(() -> {
+            this.indicatorColor = indicatorColor;
+            indicatorPaint.setColor(indicatorColor);
+        });
     }
     
     public void setProgressForegroundColor(int progressForegroundColor) {
-        this.progressForegroundColor = progressForegroundColor;
-        invalidate();
-        requestLayout();
+        needInvalidate(() -> this.progressForegroundColor = progressForegroundColor);
     }
     
     public void setProgressBackgroundColor(int progressBackgroundColor) {
-        this.progressBackgroundColor = progressBackgroundColor;
-        invalidate();
-        requestLayout();
+        needInvalidate(() -> this.progressBackgroundColor = progressBackgroundColor);
     }
     
     public void addSection(float... ratio) {
@@ -168,17 +158,18 @@ public class RoundPeakProgressBar extends View {
     }
     
     public void addSection(Section... section) {
-        sections.addAll(Arrays.asList(section));
-        invalidate();
-        requestLayout();
+        needInvalidate(() -> sections.addAll(Arrays.asList(section)));
     }
     
     public void clearSection() {
-        sections.clear();
+        needInvalidate(() -> sections.clear());
+    }
+    
+    private void needInvalidate(Runnable runnable) {
+        runnable.run();
         invalidate();
         requestLayout();
     }
-    
     
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {

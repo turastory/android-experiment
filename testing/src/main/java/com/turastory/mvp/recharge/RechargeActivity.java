@@ -9,7 +9,7 @@ import android.widget.EditText;
 import com.turastory.mvp.R;
 
 /**
- * Created by nyh0111 on 2018-03-29.
+ * Created by tura on 2018-03-29.
  */
 
 public class RechargeActivity extends AppCompatActivity {

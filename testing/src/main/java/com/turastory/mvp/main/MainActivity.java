@@ -11,7 +11,7 @@ import com.turastory.mvp.R;
 import com.turastory.mvp.recharge.RechargeActivity;
 
 /**
- * Created by nyh0111 on 2018-03-29.
+ * Created by tura on 2018-03-29.
  */
 
 public class MainActivity extends AppCompatActivity {

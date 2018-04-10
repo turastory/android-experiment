@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by nyh0111 on 2018-04-03.
+ * Created by tura on 2018-04-03.
  */
 
 public abstract class ComponentBaseFragment extends Fragment {

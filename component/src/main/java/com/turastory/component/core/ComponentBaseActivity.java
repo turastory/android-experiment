@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by nyh0111 on 2018-04-02.
+ * Created by tura on 2018-04-02.
  */
 
 public abstract class ComponentBaseActivity extends AppCompatActivity {

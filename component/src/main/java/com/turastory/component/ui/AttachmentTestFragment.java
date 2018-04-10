@@ -10,7 +10,7 @@ import com.turastory.component.R;
 import com.turastory.component.core.ComponentBaseFragment;
 
 /**
- * Created by nyh0111 on 2018-04-03.
+ * Created by tura on 2018-04-03.
  */
 
 public class AttachmentTestFragment extends ComponentBaseFragment {

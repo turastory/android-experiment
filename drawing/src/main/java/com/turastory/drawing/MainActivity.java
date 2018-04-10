@@ -9,7 +9,7 @@ import android.view.animation.AccelerateDecelerateInterpolator;
 import java.util.Random;
 
 /**
- * Created by nyh0111 on 2018-04-05.
+ * Created by tura on 2018-04-05.
  */
 
 public class MainActivity extends AppCompatActivity {

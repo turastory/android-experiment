@@ -10,7 +10,7 @@ import android.util.Log;
 import android.view.View;
 
 /**
- * Created by nyh0111 on 2018-04-05.
+ * Created by tura on 2018-04-05.
  *
  * RoundCornerProgressBar with Section
  */

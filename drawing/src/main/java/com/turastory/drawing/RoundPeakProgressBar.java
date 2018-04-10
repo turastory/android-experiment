@@ -19,7 +19,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Created by nyh0111 on 2018-04-05.
+ * Created by tura on 2018-04-05.
  * <p>
  * RoundProgressBar with indicator.
  * <p>

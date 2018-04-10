@@ -3,7 +3,7 @@ package com.turastory.buttonlocker;
 import android.view.View;
 
 /**
- * Created by nyh0111 on 2018-03-08.
+ * Created by tura on 2018-03-08.
  * <p>
  * OnClickListener를 감싸는 일종의 Proxy 리스너.
  * 선처리/후처리가 필요한 상황에 유용하다.

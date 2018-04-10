@@ -7,7 +7,7 @@ import com.turastory.component.R;
 import com.turastory.component.core.ComponentBaseActivity;
 
 /**
- * Created by nyh0111 on 2018-04-02.
+ * Created by tura on 2018-04-02.
  */
 
 public class ComponentTestActivity extends ComponentBaseActivity {

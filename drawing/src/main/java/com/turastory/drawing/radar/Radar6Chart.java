@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Created by nyh0111 on 2018-04-10.
+ * Created by tura on 2018-04-10.
  * <p>
  * RadarChart with points and labels..
  * Not that general purpose.

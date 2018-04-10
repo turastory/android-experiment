@@ -17,7 +17,7 @@ import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 /**
- * Created by nyh0111 on 2018-04-02.
+ * Created by tura on 2018-04-02.
  */
 
 @RunWith(RobolectricTestRunner.class)

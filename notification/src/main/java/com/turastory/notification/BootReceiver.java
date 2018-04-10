@@ -7,7 +7,7 @@ import android.content.Intent;
 import java.util.Calendar;
 
 /**
- * Created by nyh0111 on 2018-03-28.
+ * Created by tura on 2018-03-28.
  */
 
 public class BootReceiver extends BroadcastReceiver {

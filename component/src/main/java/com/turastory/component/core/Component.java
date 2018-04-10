@@ -1,7 +1,7 @@
 package com.turastory.component.core;
 
 /**
- * Created by nyh0111 on 2018-04-02.
+ * Created by tura on 2018-04-02.
  */
 
 public interface Component {

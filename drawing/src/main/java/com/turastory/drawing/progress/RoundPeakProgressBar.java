@@ -24,8 +24,6 @@ import java.util.List;
  * Created by tura on 2018-04-05.
  * <p>
  * RoundProgressBar with indicator.
- * <p>
- * TODO: add section
  */
 
 public class RoundPeakProgressBar extends View {

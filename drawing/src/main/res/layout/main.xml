@@ -26,17 +26,17 @@
     android:id="@+id/progress_bar"
     android:layout_width="match_parent"
     android:layout_height="16dp"
-    android:layout_marginTop="24dp"
     android:layout_marginBottom="24dp"
     android:layout_marginLeft="16dp"
     android:layout_marginRight="16dp"
+    android:layout_marginTop="24dp"
     android:padding="4dp"
-    app:progressBackgroundColor="#332874ff"
-    app:progressForegroundColor="#cc2874ff"
-    app:indicatorHeight="4dp"
     app:indicatorColor="#333333"
+    app:indicatorHeight="4dp"
     app:max="100"
     app:progress="50"
+    app:progressBackgroundColor="#332874ff"
+    app:progressForegroundColor="#cc2874ff"
     app:radius="12dp"
     app:sectionDividerColor="#ffffff"/>
 
@@ -44,17 +44,17 @@
     android:id="@+id/Reset"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:text="@string/reset_button"
-    android:layout_gravity="center"/>
-  
+    android:layout_gravity="center"
+    android:text="@string/reset_button"/>
+
   <Button
     android:id="@+id/see_chart_button"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="20dp"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
+    android:layout_marginTop="20dp"
     android:text="see chart"/>
-  
+
 </LinearLayout>
 

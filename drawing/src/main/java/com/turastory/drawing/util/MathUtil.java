@@ -2,7 +2,7 @@ package com.turastory.drawing.util;
 
 /**
  * Created by tura on 2018-04-05.
- *
+ * <p>
  * Handy util class for providing methods which java.lang.Math not provides.
  */
 public class MathUtil {

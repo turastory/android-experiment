@@ -11,11 +11,15 @@ import android.view.View;
 
 /**
  * Created by tura on 2018-04-05.
- *
+ * <p>
  * RoundCornerProgressBar with Section
  */
 
 public class SimpleTestableView extends View {
+    
+    private Paint sectionPaint;
+    private Path sectionPath;
+    private int sectionColor = Color.BLACK;
     
     public SimpleTestableView(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -26,12 +30,6 @@ public class SimpleTestableView extends View {
         super(context, attrs, defStyleAttr);
         init();
     }
-    
-    
-    private Paint sectionPaint;
-    private Path sectionPath;
-    
-    private int sectionColor = Color.BLACK;
     
     private void init() {
         sectionPaint = new Paint();
@@ -56,16 +54,16 @@ public class SimpleTestableView extends View {
         Log.e("asdf", "padding right: " + getPaddingRight());
         Log.e("asdf", "padding bottom: " + getPaddingBottom());
         Log.e("asdf", "padding top: " + getPaddingTop());
-
+        
         // 1. Measured width and height don't affect by padding or margin.
         // 2. MeasuredSpec.getSize(###) == getMeasured###() in this method.
         
         Log.e("asdf", "Measured width: " + MeasureSpec.getSize(widthMeasureSpec));
         Log.e("asdf", "Measured height: " + MeasureSpec.getSize(heightMeasureSpec));
-    
+        
         Log.e("asdf", "Measured width by function: " + getMeasuredWidth());
         Log.e("asdf", "Measured height by function: " + getMeasuredHeight());
-    
+        
         Log.e("asdf", "Measured width by function: " + getMeasuredWidth());
         Log.e("asdf", "Measured height by function: " + getMeasuredHeight());
     }

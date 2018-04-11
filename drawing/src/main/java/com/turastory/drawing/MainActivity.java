@@ -15,14 +15,14 @@ import java.util.Random;
  */
 
 public class MainActivity extends AppCompatActivity {
-
+    
     private RoundPeakProgressBar progressBar;
     
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-    
+        
         progressBar = findViewById(R.id.progress_bar);
         
         findViewById(R.id.Reset).setOnClickListener(v -> randomize());

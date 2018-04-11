@@ -238,7 +238,7 @@ public class Radar6Chart extends View {
             paint.setColor(dotStrokeColor);
             paint.setStrokeWidth(dotWidth);
             paint.setStrokeCap(Paint.Cap.ROUND);
-    
+            
             for (PointF point : points) {
                 canvas.drawCircle(point.x, point.y, dotRadius, paint);
             }

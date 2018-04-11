@@ -46,7 +46,7 @@ public class RoundPeakProgressBar extends View {
     
     private List<Section> sections = new ArrayList<>();
     
-    // set from users
+    // fields set by users
     
     private float progress;
     private float max;
@@ -103,21 +103,18 @@ public class RoundPeakProgressBar extends View {
     }
     
     
-    // getters
+    // getters / setters
     
     public float getProgress() {
         return progress;
     }
     
-    public float getMax() {
-        return max;
-    }
-    
-    
-    // setters
-    
     public void setProgress(float progress) {
         needInvalidate(() -> this.progress = progress);
+    }
+    
+    public float getMax() {
+        return max;
     }
     
     public void setMax(float max) {

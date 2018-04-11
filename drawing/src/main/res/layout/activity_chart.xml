@@ -9,15 +9,15 @@
     android:layout_width="0dp"
     android:layout_height="0dp"
     android:background="#eee"
+    app:dotColor="#f7594d"
     app:layout_constraintDimensionRatio="9:7"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
     app:layout_constraintTop_toTopOf="parent"
-    app:textSize="14sp"
-    app:textColor="#333333"
-    app:dotColor="#f7594d"
-    app:polygonForegroundDrawable="@drawable/bg_polygon"
     app:polygonBackgroundColor="#1a4a7ce0"
-    app:polygonForegroundColor="#3d91e0"/>
+    app:polygonForegroundColor="#3d91e0"
+    app:polygonForegroundDrawable="@drawable/bg_polygon"
+    app:textColor="#333333"
+    app:textSize="14sp"/>
 
 </android.support.constraint.ConstraintLayout>

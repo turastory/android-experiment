@@ -9,6 +9,7 @@
       <module fileurl="file://$PROJECT_DIR$/lock/lock.iml" filepath="$PROJECT_DIR$/lock/lock.iml" />
       <module fileurl="file://$PROJECT_DIR$/notification/notification.iml" filepath="$PROJECT_DIR$/notification/notification.iml" />
       <module fileurl="file://$PROJECT_DIR$/progress-management/progress-management.iml" filepath="$PROJECT_DIR$/progress-management/progress-management.iml" />
+      <module fileurl="file://$PROJECT_DIR$/sound/sound.iml" filepath="$PROJECT_DIR$/sound/sound.iml" />
       <module fileurl="file://$PROJECT_DIR$/spannable/spannable.iml" filepath="$PROJECT_DIR$/spannable/spannable.iml" />
       <module fileurl="file://$PROJECT_DIR$/testing/testing.iml" filepath="$PROJECT_DIR$/testing/testing.iml" />
     </modules>

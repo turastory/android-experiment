@@ -10,6 +10,8 @@ import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
     
+    private Sounds sounds;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,6 +19,12 @@ public class MainActivity extends AppCompatActivity {
     
         setupGlobal();
         setupCustom();
+    }
+    
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        sounds.unloadAll();
     }
     
     private void setupGlobal() {
@@ -41,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
     }
     
     private void setupCustom() {
-        Sounds sounds = Sounds.loadFromAssets(this)
+        sounds = Sounds.loadFromAssets(this)
             .addRawSound(new Sound("Hello World", "Cartoon Enlarge.wav", 2))
             .load();
         

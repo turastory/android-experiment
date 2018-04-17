@@ -4,7 +4,7 @@ import android.support.annotation.FloatRange;
 
 /**
  * Created by tura on 2018-04-12.
- *
+ * <p>
  * Represents sound object.
  */
 public class Sound {

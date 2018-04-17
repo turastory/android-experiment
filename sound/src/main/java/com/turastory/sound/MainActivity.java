@@ -20,5 +20,17 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.play_button).setOnClickListener(v -> {
             Sounds.ready().play(songNames[random.nextInt(songNames.length)]);
         });
+    
+        findViewById(R.id.stop_button).setOnClickListener(v -> {
+            Sounds.ready().stop();
+        });
+    
+        findViewById(R.id.play_sequential_button).setOnClickListener(v -> {
+            Sounds.ready().playSequentially(songNames);
+        });
+    
+        findViewById(R.id.stop_sequential_button).setOnClickListener(v -> {
+            Sounds.ready().stopSequential();
+        });
     }
 }

@@ -16,14 +16,15 @@ public class MyApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        
-        Sounds.preloadFromAssets(getAssets())
+    
+        Sounds.preloadFromAssets(this)
             .setMaxStreamSizeAtOnce(5)
             .addRawSound(new Sound("cartoon_enlarge", "Cartoon Enlarge.wav", 1))
             .addRawSound(new Sound("cartoon_slip", "Cartoon Slip.wav", 1))
             .addRawSound(new Sound("laugh", "Crowd Laugh 5.wav", 1))
             .addRawSound(new Sound("sad_trombone", "Sad Trombone 2.wav", 1))
             .addRawSound(new Sound("yee_ha", "Yelling Yee Ha.wav", 1))
+            .enableSequentialPlayback()
             .load();
     
         // This should not play the sounds.

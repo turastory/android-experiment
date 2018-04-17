@@ -64,7 +64,7 @@ public class Sounds {
     
     // Unload all sounds.
     public void unloadAll() {
-        Stream.of(Sounds.global().rawSounds)
+        Stream.of(rawSounds)
             .forEach(entry -> pool.unload(entry.getValue().getSoundId()));
     }
     

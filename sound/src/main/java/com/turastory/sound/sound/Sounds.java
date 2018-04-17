@@ -96,11 +96,11 @@ public class Sounds {
         }
     }
     
-    public void playSequentially(String... names) {
-        playSequentially(Arrays.asList(names));
+    public void playSequentially(String[] names, Runnable onFinishListener) {
+        playSequentially(Arrays.asList(names), onFinishListener);
     }
     
-    public void playSequentially(List<String> names) {
+    public void playSequentially(List<String> names, Runnable onFinishListener) {
         if (!sequentialPlayback) {
             Log.e("Sounds", "Sequential playback not configured.");
             return;
@@ -132,10 +132,15 @@ public class Sounds {
                 
                 if (playTime > rawSound.getDuration()) {
                     playTime -= rawSound.getDuration();
-                    
+    
                     if (sequentialPlayQueue.size() > 0) {
                         rawSound = sequentialPlayQueue.remove();
                         play(rawSound.getName());
+                    } else {
+                        playingSequential.set(false);
+                        onFinishListener.run();
+                        stop();
+                        break;
                     }
                 }
                 

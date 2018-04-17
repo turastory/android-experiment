@@ -1,7 +1,9 @@
 package com.turastory.sound;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.TextView;
 
 import com.turastory.sound.sound.Sound;
 import com.turastory.sound.sound.Sounds;
@@ -40,7 +42,14 @@ public class MainActivity extends AppCompatActivity {
         });
         
         findViewById(R.id.play_sequential_button).setOnClickListener(v -> {
-            Sounds.global().playSequentially(songNames);
+            Sounds.global().playSequentially(songNames, () -> runOnUiThread(() -> {
+                TextView textView = findViewById(R.id.sample_text);
+                String prev = textView.getText().toString();
+                textView.setText("sequential call complete");
+        
+                new Handler().postDelayed(() ->
+                    textView.setText(prev), 2000);
+            }));
         });
         
         findViewById(R.id.stop_sequential_button).setOnClickListener(v -> {

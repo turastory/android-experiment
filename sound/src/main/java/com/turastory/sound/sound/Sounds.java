@@ -30,6 +30,8 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Singleton class to manage sounds.
  */
 public class Sounds {
+    private static Sounds globalInstance;
+    
     private AtomicBoolean isReady = new AtomicBoolean(false);
     private AtomicInteger playStreamId = new AtomicInteger(0);
     private SoundPool pool;
@@ -43,8 +45,12 @@ public class Sounds {
     
     }
     
-    public static Sounds ready() {
-        return LazySingletonHolder.instance;
+    public static Sounds global() {
+        return globalInstance;
+    }
+    
+    public static void setGlobalInstance(Sounds globalInstance) {
+        Sounds.globalInstance = globalInstance;
     }
     
     // Load using assets.
@@ -53,17 +59,9 @@ public class Sounds {
     }
     
     // Unload all sounds.
-    public static void unloadAll() {
-        SoundPool pool = Sounds.ready().pool;
-        Stream.of(Sounds.ready().rawSounds)
+    public void unloadAll() {
+        Stream.of(Sounds.global().rawSounds)
             .forEach(entry -> pool.unload(entry.getValue().getSoundId()));
-    }
-    
-    // Get duration of the sound.
-    private static int getDuration(Consumer<MediaMetadataRetriever> dataSourceConfigurator) {
-        MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-        dataSourceConfigurator.accept(mmr);
-        return Integer.parseInt(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
     }
     
     /**
@@ -167,8 +165,16 @@ public class Sounds {
         }
     }
     
-    private static class LazySingletonHolder {
-        private static Sounds instance = new Sounds();
+    /**
+     * Util class related to Sounds
+     */
+    public static class Util {
+        // Get duration of the sound.
+        public static int getDuration(Consumer<MediaMetadataRetriever> dataSourceConfigurator) {
+            MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+            dataSourceConfigurator.accept(mmr);
+            return Integer.parseInt(mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION));
+        }
     }
     
     /**
@@ -176,9 +182,9 @@ public class Sounds {
      */
     public static abstract class Builder {
         protected List<Sound> sounds;
-        protected boolean sequentialPlayback;
-        private int maxStreamSizeAtOnce;
-    
+        protected boolean sequentialPlayback = false;
+        private int maxStreamSizeAtOnce = 3;
+        
         private Builder() {
             sounds = new ArrayList<>();
         }
@@ -196,24 +202,31 @@ public class Sounds {
     
         // Should load sounds in another thread because
         // If there're a lot of sounds It may take some time to load them all.
-        public void load(Runnable onLoadComplete) {
+        public Sounds load(Runnable onLoadComplete) {
             SoundPool pool = createSoundPool(maxStreamSizeAtOnce);
+            Sounds sounds = new Sounds();
+            
             new Thread(() -> {
                 Log.e("Sounds", "load sounds..");
-                Sounds.ready().isReady.set(false);
+                sounds.isReady.set(false);
+                
                 Map<String, RawSound> rawSounds = loadRawSounds(pool);
-                Sounds.ready().pool = pool;
-                Sounds.ready().rawSounds = rawSounds;
-                Sounds.ready().isReady.set(true);
-                Sounds.ready().sequentialPlayback = sequentialPlayback;
+                sounds.pool = pool;
+                sounds.rawSounds = rawSounds;
+                sounds.sequentialPlayback = sequentialPlayback;
+    
+                sounds.isReady.set(true);
                 Log.e("Sounds", "load sounds Complete!");
+    
                 if (onLoadComplete != null)
                     onLoadComplete.run();
             }).start();
+        
+            return sounds;
         }
     
-        public void load() {
-            load(null);
+        public Sounds load() {
+            return load(null);
         }
     
         public Builder addRawSound(Sound sound) {
@@ -261,7 +274,7 @@ public class Sounds {
     
                     int soundId = pool.load(afd, 1);
                     int duration = sequentialPlayback ?
-                        getDuration(mmr -> mmr.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength())) :
+                        Util.getDuration(mmr -> mmr.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength())) :
                         0;
     
                     return new RawSound(sound.getName(), soundId, sound.getPitch(), duration);
@@ -278,7 +291,7 @@ public class Sounds {
             return Stream.of(sounds).map(sound -> {
                 int soundId = pool.load(sound.getPath(), 1);
                 int duration = sequentialPlayback ?
-                    getDuration(mmr -> mmr.setDataSource(sound.getPath())) :
+                    Util.getDuration(mmr -> mmr.setDataSource(sound.getPath())) :
                     0;
                 
                 return new RawSound(sound.getName(), soundId, sound.getPitch(), duration);

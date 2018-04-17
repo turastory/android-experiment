@@ -13,11 +13,13 @@ import com.turastory.sound.sound.Sounds;
  */
 public class MyApplication extends Application {
     
+    private Sounds sounds;
+    
     @Override
     public void onCreate() {
         super.onCreate();
     
-        Sounds.preloadFromAssets(this)
+        sounds = Sounds.preloadFromAssets(this)
             .setMaxStreamSizeAtOnce(5)
             .addRawSound(new Sound("cartoon_enlarge", "Cartoon Enlarge.wav", 1))
             .addRawSound(new Sound("cartoon_slip", "Cartoon Slip.wav", 1))
@@ -27,18 +29,20 @@ public class MyApplication extends Application {
             .enableSequentialPlayback()
             .load();
     
+        Sounds.setGlobalInstance(sounds);
+    
         // This should not play the sounds.
         testNotReady();
     }
     
     private void testNotReady() {
-        Sounds.ready().play("yee_ha");
+        Sounds.global().play("yee_ha");
     }
     
     @Override
     public void onTerminate() {
         super.onTerminate();
-        
-        Sounds.unloadAll();
+    
+        sounds.unloadAll();
     }
 }

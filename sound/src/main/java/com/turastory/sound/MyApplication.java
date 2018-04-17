@@ -19,7 +19,7 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
     
-        sounds = Sounds.preloadFromAssets(this)
+        sounds = Sounds.loadFromAssets(this)
             .setMaxStreamSizeAtOnce(5)
             .addRawSound(new Sound("cartoon_enlarge", "Cartoon Enlarge.wav", 1))
             .addRawSound(new Sound("cartoon_slip", "Cartoon Slip.wav", 1))

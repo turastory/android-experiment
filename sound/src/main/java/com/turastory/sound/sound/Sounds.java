@@ -54,8 +54,12 @@ public class Sounds {
     }
     
     // Load using assets.
-    public static Sounds.Builder preloadFromAssets(Context context) {
+    public static Sounds.Builder loadFromAssets(Context context) {
         return new Sounds.AssetsBuilder(context);
+    }
+    
+    public static Sounds.Builder loadFromFiles() {
+        return new Sounds.FileBuilder();
     }
     
     // Unload all sounds.
@@ -221,7 +225,7 @@ public class Sounds {
                 if (onLoadComplete != null)
                     onLoadComplete.run();
             }).start();
-        
+    
             return sounds;
         }
     

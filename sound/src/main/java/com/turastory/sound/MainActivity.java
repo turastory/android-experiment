@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
     }
     
     private void setupCustom() {
-        Sounds sounds = Sounds.preloadFromAssets(this)
+        Sounds sounds = Sounds.loadFromAssets(this)
             .addRawSound(new Sound("Hello World", "Cartoon Enlarge.wav", 2))
             .load();
         

@@ -97,6 +97,10 @@ public class Sounds {
     }
     
     public void playSequentially(String... names) {
+        playSequentially(Arrays.asList(names));
+    }
+    
+    public void playSequentially(List<String> names) {
         if (!sequentialPlayback) {
             Log.e("Sounds", "Sequential playback not configured.");
             return;
@@ -105,7 +109,7 @@ public class Sounds {
         playingSequential.set(false);
         sequentialPlayQueue.clear();
         
-        Stream.of(Arrays.asList(names)).forEach(name -> use(name, sound -> {
+        Stream.of(names).forEach(name -> use(name, sound -> {
             sequentialPlayQueue.add(sound);
         }));
         

@@ -11,6 +11,7 @@
       <module fileurl="file://$PROJECT_DIR$/progress-management/progress-management.iml" filepath="$PROJECT_DIR$/progress-management/progress-management.iml" />
       <module fileurl="file://$PROJECT_DIR$/sound/sound.iml" filepath="$PROJECT_DIR$/sound/sound.iml" />
       <module fileurl="file://$PROJECT_DIR$/spannable/spannable.iml" filepath="$PROJECT_DIR$/spannable/spannable.iml" />
+      <module fileurl="file://$PROJECT_DIR$/speechrecognition/speechrecognition.iml" filepath="$PROJECT_DIR$/speechrecognition/speechrecognition.iml" />
       <module fileurl="file://$PROJECT_DIR$/testing/testing.iml" filepath="$PROJECT_DIR$/testing/testing.iml" />
     </modules>
   </component>

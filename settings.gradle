@@ -1,4 +1,4 @@
-include ':lock', ':sound'
+include ':lock', ':sound', ':speechrecognition'
 include ':progress-management'
 include ':spannable'
 include ':notification'

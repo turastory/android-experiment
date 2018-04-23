@@ -40,3 +40,7 @@ All about drawing something. (Canvas, ...)
 
 All about animations! View/Property, ViewProperty, Transitions, ...
 + Adobe Effects animation with Lottie Android
+
+### Speech
+
+Speech recognition test using Google SpeechRecognizer!

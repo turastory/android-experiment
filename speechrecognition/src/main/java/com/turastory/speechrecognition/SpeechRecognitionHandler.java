@@ -14,13 +14,16 @@ import java.util.ArrayList;
  */
 public class SpeechRecognitionHandler {
     
-    private static final int REQUEST_SPEECH_RECOGNITION = 100;
+    private static final int REQUEST_SPEECH_RECOGNITION_DEFAULT = 792;
     
     private String packageName;
     private String language;
     private String promptMessage = "말을 하세요.";
+    
     private SpeechListener speechListener;
     private AllSpeechListener allSpeechListener;
+    
+    private int requestCode = REQUEST_SPEECH_RECOGNITION_DEFAULT;
     
     private SpeechRecognitionHandler(String language) {
         this.language = language;
@@ -50,12 +53,17 @@ public class SpeechRecognitionHandler {
         return this;
     }
     
+    public SpeechRecognitionHandler setRequestCode(int requestCode) {
+        this.requestCode = requestCode;
+        return this;
+    }
+    
     public void startSpeechRecognition(Activity activity) {
         Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
         intent.putExtra(RecognizerIntent.EXTRA_CALLING_PACKAGE, packageName == null ? activity.getPackageName() : packageName);
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, language == null ? provideDefaultLanguage() : language);
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, promptMessage);
-        activity.startActivityForResult(intent, REQUEST_SPEECH_RECOGNITION);
+        activity.startActivityForResult(intent, requestCode);
     }
     
     private boolean provideDefaultLanguage() {
@@ -67,13 +75,14 @@ public class SpeechRecognitionHandler {
             Log.d("SpeechRecognition", "Please provide result consumer for receive.");
             return;
         }
-        
-        if (requestCode == REQUEST_SPEECH_RECOGNITION) {
+    
+        if (requestCode == REQUEST_SPEECH_RECOGNITION_DEFAULT) {
             if (resultCode == Activity.RESULT_OK && data != null) {
                 ArrayList<String> results = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
                 
                 if (results != null) {
-                    allSpeechListener.onResults(results);
+                    if (allSpeechListener != null)
+                        allSpeechListener.onResults(results);
                     
                     if (results.size() > 0)
                         if (speechListener != null)

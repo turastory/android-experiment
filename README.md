@@ -44,3 +44,7 @@ All about animations! View/Property, ViewProperty, Transitions, ...
 ### Speech
 
 Speech recognition test using Google SpeechRecognizer!
+
+### Security
+
+Secure SharedPreference with Secure Preferences, and more!

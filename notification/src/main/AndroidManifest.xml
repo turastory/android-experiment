@@ -20,6 +20,8 @@
       </intent-filter>
     </activity>
     <activity android:name=".OnWakeActivity"/>
+    <activity android:name=".SampleActivity"/>
+
     <receiver android:name=".AlarmReceiver"/>
     <receiver android:name=".BootReceiver">
       <intent-filter>

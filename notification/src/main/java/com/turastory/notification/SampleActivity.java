@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 
 /**
  * Created by tura on 2018-05-29.
+ *
+ * This is sample activity for notification.
  */
 public class SampleActivity extends AppCompatActivity {
     

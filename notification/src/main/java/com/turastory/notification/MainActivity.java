@@ -26,7 +26,8 @@ import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
     
-    private static int counter = 1;
+    private static int counter = 0;
+    private static int notification_id = 1;
 
     private TextView textView;
     
@@ -109,18 +110,18 @@ public class MainActivity extends AppCompatActivity {
             .setPriority(NotificationCompat.PRIORITY_HIGH)
             .setSound(defaultSoundUri)
             .setContentIntent(pendingIntent)
+            .setNumber(++counter)
             .setStyle(new NotificationCompat.InboxStyle()
                 .setBigContentTitle("I'm Groot!!")
                 .addLine("Hello")
                 .addLine("My name is")
                 .addLine("tura")
-                .setSummaryText("Hmm.. this is summary"));
+                .setSummaryText("Hmm.. this is summary " + counter));
         
         NotificationManager notificationManager =
             (NotificationManager) this.getSystemService(Context.NOTIFICATION_SERVICE);
-        
-        notificationManager.notify(counter /* ID of notification */, notificationBuilder.build());
-        counter++;
+    
+        notificationManager.notify(notification_id /* ID of notification */, notificationBuilder.build());
     }
     
     @RequiresApi(api = Build.VERSION_CODES.O)
